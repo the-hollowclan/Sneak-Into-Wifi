@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select 5G Wi-Fi Network</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='wifi.css') }}">
+</head>
+<body>
+  <div class="wifi-container">
+    <h1>Available Wi-Fi Networks</h1>
+    <p class="subtext">Connect to auto-use 5G channel whenever you reconnect.</p>
+
+    <div class="wifi-list">
+    {% for net in fake_networks %}
+      <div class="wifi-item {% if net.secured %}locked{% endif %} {%if net.enterprise %}enterprise{%endif%}">
+        <div class="wifi-name">{{ net.ssid }}</div>
+        <div class="wifi-signal signal-{{ net.signal }}"></div>
+      </div>
+    {% endfor %}
+    </div>
+
+    <button class="refresh">🔄 Refresh Networks</button>
+  </div>
+  <script src="{{ url_for('static', filename='wifi.js') }}"></script>
+</body>
+</html>
